@@ -8,7 +8,7 @@
 	},
 	"homepage": "https://github.com/mehm8128/rehype-toc",
 	"license": "MIT",
-	"description": "rehype plugin to generate a collapsable table of contents",
+	"description": "rehype plugin to generate a collapsible table of contents",
 	"keywords": [
 		"rehype",
 		"toc",

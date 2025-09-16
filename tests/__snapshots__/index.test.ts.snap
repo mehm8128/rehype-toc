@@ -1,13 +1,13 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`rehypeCollapsableToc > h2だけのとき、同じレベルで作成される 1`] = `
+exports[`rehypeCollapsibleToc > h2だけのとき、同じレベルで作成される 1`] = `
 "<details><summary>目次</summary><ol><li><a href="#Heading 1">Heading 1</a></li><li><a href="#Heading 2">Heading 2</a></li><li><a href="#Heading 3">Heading 3</a></li></ol></details><html><head></head><body><h2 id="heading-1"><a href="#heading-1">Heading 1</a></h2>
       <h2 id="heading-2"><a href="#heading-2">Heading 2</a></h2>
       <h2 id="heading-3"><a href="#heading-3">Heading 3</a></h2>
       </body></html>"
 `;
 
-exports[`rehypeCollapsableToc > h2以外で同じレベルの見出しが適切に作成される 1`] = `
+exports[`rehypeCollapsibleToc > h2以外で同じレベルの見出しが適切に作成される 1`] = `
 "<details><summary>目次</summary><ol><li><a href="#Heading 1">Heading 1</a><ol><li><a href="#Heading 1-1">Heading 1-1</a><ol><li><a href="#Heading 1-2">Heading 1-2</a><ol><li><a href="#Heading 1-2-1">Heading 1-2-1</a><ol><li><a href="#Heading 1-2-2">Heading 1-2-2</a></li></ol></li></ol></li></ol></li></ol></li></ol></details><html><head></head><body><h2 id="heading-1"><a href="#heading-1">Heading 1</a></h2>
       <h3 id="heading-1-1"><a href="#heading-1-1">Heading 1-1</a></h3>
       <h3 id="heading-1-2"><a href="#heading-1-2">Heading 1-2</a></h3>
@@ -16,7 +16,7 @@ exports[`rehypeCollapsableToc > h2以外で同じレベルの見出しが適切�
     </body></html>"
 `;
 
-exports[`rehypeCollapsableToc > 低いレベルの見出しに戻るときにも適切に作成される 1`] = `
+exports[`rehypeCollapsibleToc > 低いレベルの見出しに戻るときにも適切に作成される 1`] = `
 "<details><summary>目次</summary><ol><li><a href="#Heading 1">Heading 1</a><ol><li><a href="#Heading 1-1">Heading 1-1</a><ol><li><a href="#Heading 1-1-1">Heading 1-1-1</a><ol><li><a href="#Heading 2">Heading 2</a><ol><li><a href="#Heading 2-1">Heading 2-1</a></li></ol></li></ol></li></ol></li></ol></li><li><a href="#Heading 3">Heading 3</a></li></ol></details><html><head></head><body><h2 id="heading-1"><a href="#heading-1">Heading 1</a></h2>
       <h3 id="heading-1-1"><a href="#heading-1-1">Heading 1-1</a></h3>
       <h4 id="heading-1-1-1"><a href="#heading-1-1-1">Heading 1-1-1</a></h4>

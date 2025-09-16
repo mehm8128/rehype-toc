@@ -1,7 +1,7 @@
 import type { Element, ElementContent, Root, Text } from 'hast'
 import { visit } from 'unist-util-visit'
 
-export const rehypeCollapsableToc = () => {
+export const rehypeCollapsibleToc = () => {
 	return (tree: Root) => {
 		const rootUlElement: Element = {
 			type: 'element',
@@ -14,7 +14,7 @@ export const rehypeCollapsableToc = () => {
 			visitorCallback(node, rootUlElement)
 		})
 
-		const detailsElement = createCollapsableToc(rootUlElement)
+		const detailsElement = createCollapsibleToc(rootUlElement)
 		tree.children.unshift(detailsElement)
 	}
 }
@@ -140,7 +140,7 @@ const createListItemElement = (node: Element): Element => {
 	}
 }
 
-const createCollapsableToc = (rootUlElement: Element): Element => {
+const createCollapsibleToc = (rootUlElement: Element): Element => {
 	const summaryElement: Element = {
 		type: 'element',
 		tagName: 'summary',

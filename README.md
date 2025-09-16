@@ -21,11 +21,11 @@ pnpm install @mehm8128/rehype-toc
 ### astro.config.mjs
 
 ```ts
-import { rehypeCollapsableToc } from "@mehm8128/rehype-toc";
+import { rehypeCollapsibleToc } from "@mehm8128/rehype-toc";
 
 export default defineConfig({
   markdown: {
-    rehypePlugins: [rehypeCollapsableToc],
+    rehypePlugins: [rehypeCollapsibleToc],
   },
 });
 ```
@@ -34,8 +34,8 @@ export default defineConfig({
 
 ```ts
 import { rehype } from "rehype"
-import { rehypeCollapsableToc } from "@mehm8128/rehype-toc";
+import { rehypeCollapsibleToc } from "@mehm8128/rehype-toc";
 
 const input = "<h2 id="heading-id"><a href="#heading-id">Heading</a></h2>";
-const { value } = await rehype().use(rehypeCollapsableToc).process(input);
+const { value } = await rehype().use(rehypeCollapsibleToc).process(input);
 ```
