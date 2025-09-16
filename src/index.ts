@@ -19,7 +19,7 @@ export const rehypeCollapsableToc = () => {
 	}
 }
 
-export const visitorCallback = (node: Element, rootUlElement: Element) => {
+const visitorCallback = (node: Element, rootUlElement: Element) => {
 	if (!/^h[2-6]$/.test(node.tagName)) {
 		return
 	}
