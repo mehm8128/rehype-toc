@@ -1,21 +1,7 @@
 # rehype-toc
 
-## Development
+rehype plugin to generate a table of contents from headings in your markdown.
 
-- Install dependencies:
+You can create the table of contents such below.
 
-```bash
-pnpm install
-```
-
-- Run the unit tests:
-
-```bash
-pnpm run test
-```
-
-- Build the library:
-
-```bash
-pnpm run build
-```
+![A table of contents whose each items are anchor link.](assets/toc.png)
