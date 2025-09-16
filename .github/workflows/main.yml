@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: jdx/mise-action@v3
+        with:
+          mise_toml: |
+            [tools]
+            pnpm = "latest"
+      - run: pnpm install
+      - run: pnpm run typecheck
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: jdx/mise-action@v3
+        with:
+          mise_toml: |
+            [tools]
+            pnpm = "latest"
+      - run: pnpm install
+      - run: pnpm run test
