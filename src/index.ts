@@ -68,10 +68,10 @@ const searchSameLevelUlElement = (
 		return rootLiElement
 	}
 
-	if (rootLiElement.children[1] === undefined) {
+	const childUlElement = assertElementNodeList(rootLiElement.children)[1]
+	if (childUlElement === undefined) {
 		return
 	}
-	const childUlElement = assertElementNode(rootLiElement.children[1])
 
 	return searchSameLevelUlElement(
 		assertElementNodeList(childUlElement.children),
@@ -87,10 +87,10 @@ const getDeepestLiElement = (rootUlElement: Element[]): Element => {
 		rootUlElement[rootUlElement.length - 1]
 	)
 
-	if (!rootLiElement.children[1]) {
+	const olElement = assertElementNodeList(rootLiElement.children)[1]
+	if (!olElement) {
 		return rootLiElement
 	}
-	const olElement = assertElementNode(rootLiElement.children[1])
 
 	return getDeepestLiElement(assertElementNodeList(olElement.children))
 }

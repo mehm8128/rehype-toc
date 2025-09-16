@@ -6,7 +6,7 @@
 
 rehype plugin to generate a table of contents from headings in your markdown.
 
-You can create the table of contents such below.
+You can create the table of contents as follows.
 
 ![A table of contents whose each items are anchor link.](assets/toc.png)
 
