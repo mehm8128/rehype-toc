@@ -13,7 +13,7 @@ You can create the table of contents as follows.
 ## Installation
 
 ```bash
-pnpm install @mehm8128/rehype-toc
+pnpm add @mehm8128/rehype-toc
 ```
 
 ## Usage
