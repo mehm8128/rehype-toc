@@ -3,7 +3,7 @@ import { visit } from 'unist-util-visit'
 
 export const rehypeCollapsibleToc = () => {
 	return (tree: Root) => {
-		const rootUlElement: Element = {
+		const rootOlElement: Element = {
 			type: 'element',
 			tagName: 'ol',
 			properties: {},
@@ -11,70 +11,70 @@ export const rehypeCollapsibleToc = () => {
 		}
 
 		visit(tree, 'element', node => {
-			visitorCallback(node, rootUlElement)
+			visitorCallback(node, rootOlElement)
 		})
 
-		const detailsElement = createCollapsibleToc(rootUlElement)
+		const detailsElement = createCollapsibleToc(rootOlElement)
 		tree.children.unshift(detailsElement)
 	}
 }
 
-const visitorCallback = (node: Element, rootUlElement: Element) => {
+const visitorCallback = (node: Element, rootOlElement: Element) => {
 	if (!/^h[2-6]$/.test(node.tagName)) {
 		return
 	}
 
 	const headingLevel = getHeadingLevelFromElement(node)
 	const liElement = createListItemElement(node)
-	const rootUlElementChildren = assertElementNodeList(rootUlElement.children)
+	const rootOlElementChildren = assertElementNodeList(rootOlElement.children)
 
 	// h2ならolに直接追加
 	if (headingLevel === 2) {
-		rootUlElement.children.push(liElement)
+		rootOlElement.children.push(liElement)
 		return
 	}
 
 	// 一番新しいliから、同じレベルのheadingを入れているolを探す
 	const rootElementHeadingLevel = 2
-	const sameLevelUlElement = searchSameLevelUlElement(
-		rootUlElement,
+	const sameLevelOlElement = searchSameLevelOlElement(
+		rootOlElement,
 		headingLevel,
 		rootElementHeadingLevel
 	)
-	if (sameLevelUlElement) {
-		sameLevelUlElement.children.push(liElement)
+	if (sameLevelOlElement) {
+		sameLevelOlElement.children.push(liElement)
 		return
 	}
 
 	// 一番新しいliの一番深いところに新しくolを作って追加
-	const deepestLiElement = getDeepestLiElement(rootUlElementChildren)
-	const newUlElement = createUlElement()
-	newUlElement.children.push(liElement)
-	deepestLiElement.children.push(newUlElement)
+	const deepestLiElement = getDeepestLiElement(rootOlElementChildren)
+	const newOlElement = createOlElement()
+	newOlElement.children.push(liElement)
+	deepestLiElement.children.push(newOlElement)
 }
 
 /**
  * 引数のolに入っている一番新しいliの中で、levelと同じ見出しレベルのli要素を返す
  */
-const searchSameLevelUlElement = (
-	rootUlElement: Element,
+const searchSameLevelOlElement = (
+	rootOlElement: Element,
 	level: number,
 	rootElementHeadingLevel: number
 ): Element | undefined => {
 	const rootLiElement = assertElementNode(
-		rootUlElement.children[rootUlElement.children.length - 1]
+		rootOlElement.children[rootOlElement.children.length - 1]
 	)
 	if (level === rootElementHeadingLevel) {
-		return rootUlElement
+		return rootOlElement
 	}
 
-	const childUlElement = assertElementNodeList(rootLiElement.children)[1]
-	if (childUlElement === undefined) {
+	const childOlElement = assertElementNodeList(rootLiElement.children)[1]
+	if (childOlElement === undefined) {
 		return
 	}
 
-	return searchSameLevelUlElement(
-		childUlElement,
+	return searchSameLevelOlElement(
+		childOlElement,
 		level,
 		rootElementHeadingLevel + 1
 	)
@@ -83,9 +83,9 @@ const searchSameLevelUlElement = (
 /**
  * 引数のolに入っている一番新しいliの中で、一番深いli要素を取得する
  */
-const getDeepestLiElement = (rootUlElement: Element[]): Element => {
+const getDeepestLiElement = (rootOlElement: Element[]): Element => {
 	const rootLiElement = assertElementNode(
-		rootUlElement[rootUlElement.length - 1]
+		rootOlElement[rootOlElement.length - 1]
 	)
 
 	const olElement = assertElementNodeList(rootLiElement.children)[1]
@@ -101,7 +101,7 @@ const getHeadingLevelFromElement = (headingElement: Element) => {
 	return headingLevel
 }
 
-const createUlElement = (): Element => {
+const createOlElement = (): Element => {
 	return {
 		type: 'element',
 		tagName: 'ol',
@@ -137,7 +137,7 @@ const createListItemElement = (node: Element): Element => {
 	}
 }
 
-const createCollapsibleToc = (rootUlElement: Element): Element => {
+const createCollapsibleToc = (rootOlElement: Element): Element => {
 	const summaryElement: Element = {
 		type: 'element',
 		tagName: 'summary',
@@ -148,7 +148,7 @@ const createCollapsibleToc = (rootUlElement: Element): Element => {
 		type: 'element',
 		tagName: 'details',
 		properties: {},
-		children: [summaryElement, rootUlElement]
+		children: [summaryElement, rootOlElement]
 	}
 
 	return detailsElement
