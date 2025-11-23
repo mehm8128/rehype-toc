@@ -1,4 +1,4 @@
-import type { Element, ElementContent, Root, Text } from 'hast'
+import type { Element, ElementContent, Root } from 'hast'
 import { visit } from 'unist-util-visit'
 
 export const rehypeCollapsibleToc = () => {
@@ -35,9 +35,11 @@ const visitorCallback = (node: Element, rootUlElement: Element) => {
 	}
 
 	// 一番新しいliから、同じレベルのheadingを入れているolを探す
+	const rootElementHeadingLevel = 2
 	const sameLevelUlElement = searchSameLevelUlElement(
-		rootUlElementChildren,
-		headingLevel
+		rootUlElement,
+		headingLevel,
+		rootElementHeadingLevel
 	)
 	if (sameLevelUlElement) {
 		sameLevelUlElement.children.push(liElement)
@@ -55,17 +57,15 @@ const visitorCallback = (node: Element, rootUlElement: Element) => {
  * 引数のolに入っている一番新しいliの中で、levelと同じ見出しレベルのli要素を返す
  */
 const searchSameLevelUlElement = (
-	rootUlElement: Element[],
-	level: number
+	rootUlElement: Element,
+	level: number,
+	rootElementHeadingLevel: number
 ): Element | undefined => {
 	const rootLiElement = assertElementNode(
-		rootUlElement[rootUlElement.length - 1]
+		rootUlElement.children[rootUlElement.children.length - 1]
 	)
-	const headingAnchorElement = assertElementNode(rootLiElement.children[0])
-	const headingTextElement = assertElementText(headingAnchorElement.children[0])
-	const rootElementHeadingLevel = getHeadingLevelFromText(headingTextElement)
-	if (rootElementHeadingLevel === level) {
-		return rootLiElement
+	if (level === rootElementHeadingLevel) {
+		return rootUlElement
 	}
 
 	const childUlElement = assertElementNodeList(rootLiElement.children)[1]
@@ -74,8 +74,9 @@ const searchSameLevelUlElement = (
 	}
 
 	return searchSameLevelUlElement(
-		assertElementNodeList(childUlElement.children),
-		level
+		childUlElement,
+		level,
+		rootElementHeadingLevel + 1
 	)
 }
 
@@ -97,10 +98,6 @@ const getDeepestLiElement = (rootUlElement: Element[]): Element => {
 
 const getHeadingLevelFromElement = (headingElement: Element) => {
 	const headingLevel = Number(headingElement.tagName.charAt(1))
-	return headingLevel
-}
-const getHeadingLevelFromText = (headingElement: Text) => {
-	const headingLevel = Number(headingElement.value.charAt(1))
 	return headingLevel
 }
 
@@ -169,11 +166,4 @@ const assertElementNodeList = (nodeList: ElementContent[]): Element[] => {
 		throw new Error('Elementノードではありません')
 	}
 	return nodeList as Element[]
-}
-
-const assertElementText = (node: ElementContent): Text => {
-	if (node.type !== 'text') {
-		throw new Error('Textノードではありません')
-	}
-	return node
 }
