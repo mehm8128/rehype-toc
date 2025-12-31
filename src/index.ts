@@ -123,12 +123,14 @@ const createListItemElement = (node: Element): Element => {
 	if (!headingTextElement) {
 		throw new Error('見出しにテキストがありません')
 	}
+
+	const headingId = node.properties.id
 	const headingText = headingTextElement.value
 
 	const anchorElement: Element = {
 		type: 'element',
 		tagName: 'a',
-		properties: { href: `#${headingText}` },
+		properties: { href: `#${headingId}` },
 		children: [{ type: 'text', value: headingText }]
 	}
 
