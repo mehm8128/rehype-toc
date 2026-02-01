@@ -158,6 +158,7 @@ const createCollapsibleToc = (rootOlElement: Element): Element => {
 		type: 'element',
 		tagName: 'details',
 		properties: {
+			open: true, // TODO: 設定できるようにする
 			className: ['rehype-toc-details']
 		},
 		children: [summaryElement, rootOlElement]
