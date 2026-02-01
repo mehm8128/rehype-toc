@@ -6,7 +6,9 @@ export const rehypeCollapsibleToc = () => {
 		const rootOlElement: Element = {
 			type: 'element',
 			tagName: 'ol',
-			properties: {},
+			properties: {
+				className: ['rehype-toc-ol']
+			},
 			children: []
 		}
 
@@ -105,7 +107,9 @@ const createOlElement = (): Element => {
 	return {
 		type: 'element',
 		tagName: 'ol',
-		properties: {},
+		properties: {
+			className: ['rehype-toc-ol']
+		},
 		children: []
 	}
 }
@@ -127,14 +131,16 @@ const createListItemElement = (node: Element): Element => {
 	const anchorElement: Element = {
 		type: 'element',
 		tagName: 'a',
-		properties: { href: `#${headingId}` },
+		properties: { href: `#${headingId}`, className: ['rehype-toc-a'] },
 		children: [{ type: 'text', value: headingText }]
 	}
 
 	return {
 		type: 'element',
 		tagName: 'li',
-		properties: {},
+		properties: {
+			className: ['rehype-toc-li']
+		},
 		children: [anchorElement]
 	}
 }
@@ -143,13 +149,17 @@ const createCollapsibleToc = (rootOlElement: Element): Element => {
 	const summaryElement: Element = {
 		type: 'element',
 		tagName: 'summary',
-		properties: {},
+		properties: {
+			className: ['rehype-toc-summary']
+		},
 		children: [{ type: 'text', value: '目次' }]
 	}
 	const detailsElement: Element = {
 		type: 'element',
 		tagName: 'details',
-		properties: {},
+		properties: {
+			className: ['rehype-toc-details']
+		},
 		children: [summaryElement, rootOlElement]
 	}
 
