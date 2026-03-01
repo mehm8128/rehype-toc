@@ -1,13 +1,13 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`rehypeCollapsibleToc > h2だけのとき、同じレベルで作成される 1`] = `
+exports[`rehypeCollapsibleToc > 基本的な変換ができる > h2だけのとき、同じレベルで作成される 1`] = `
 "<details open class="rehype-toc-details"><summary class="rehype-toc-summary">目次</summary><ol class="rehype-toc-ol"><li class="rehype-toc-li"><a href="#heading-1" class="rehype-toc-a">Heading 1</a></li><li class="rehype-toc-li"><a href="#heading-2" class="rehype-toc-a">Heading 2</a></li><li class="rehype-toc-li"><a href="#heading-3" class="rehype-toc-a">Heading 3</a></li></ol></details><html><head></head><body><h2 id="heading-1"><a href="#heading-1">Heading 1</a></h2>
       <h2 id="heading-2"><a href="#heading-2">Heading 2</a></h2>
       <h2 id="heading-3"><a href="#heading-3">Heading 3</a></h2>
       </body></html>"
 `;
 
-exports[`rehypeCollapsibleToc > h2以外で同じレベルの見出しが適切に作成される 1`] = `
+exports[`rehypeCollapsibleToc > 基本的な変換ができる > h2以外で同じレベルの見出しが適切に作成される 1`] = `
 "<details open class="rehype-toc-details"><summary class="rehype-toc-summary">目次</summary><ol class="rehype-toc-ol"><li class="rehype-toc-li"><a href="#heading-1" class="rehype-toc-a">Heading 1</a><ol class="rehype-toc-ol"><li class="rehype-toc-li"><a href="#heading-1-1" class="rehype-toc-a">Heading 1-1</a></li><li class="rehype-toc-li"><a href="#heading-1-2" class="rehype-toc-a">Heading 1-2</a><ol class="rehype-toc-ol"><li class="rehype-toc-li"><a href="#heading-1-2-1" class="rehype-toc-a">Heading 1-2-1</a></li><li class="rehype-toc-li"><a href="#heading-1-2-2" class="rehype-toc-a">Heading 1-2-2</a></li></ol></li></ol></li></ol></details><html><head></head><body><h2 id="heading-1"><a href="#heading-1">Heading 1</a></h2>
       <h3 id="heading-1-1"><a href="#heading-1-1">Heading 1-1</a></h3>
       <h3 id="heading-1-2"><a href="#heading-1-2">Heading 1-2</a></h3>
@@ -16,12 +16,18 @@ exports[`rehypeCollapsibleToc > h2以外で同じレベルの見出しが適切�
     </body></html>"
 `;
 
-exports[`rehypeCollapsibleToc > 低いレベルの見出しに戻るときにも適切に作成される 1`] = `
+exports[`rehypeCollapsibleToc > 基本的な変換ができる > 低いレベルの見出しに戻るときにも適切に作成される 1`] = `
 "<details open class="rehype-toc-details"><summary class="rehype-toc-summary">目次</summary><ol class="rehype-toc-ol"><li class="rehype-toc-li"><a href="#heading-1" class="rehype-toc-a">Heading 1</a><ol class="rehype-toc-ol"><li class="rehype-toc-li"><a href="#heading-1-1" class="rehype-toc-a">Heading 1-1</a><ol class="rehype-toc-ol"><li class="rehype-toc-li"><a href="#heading-1-1-1" class="rehype-toc-a">Heading 1-1-1</a></li></ol></li><li class="rehype-toc-li"><a href="#heading-2" class="rehype-toc-a">Heading 2</a><ol class="rehype-toc-ol"><li class="rehype-toc-li"><a href="#heading-2-1" class="rehype-toc-a">Heading 2-1</a></li></ol></li></ol></li><li class="rehype-toc-li"><a href="#heading-3" class="rehype-toc-a">Heading 3</a></li></ol></details><html><head></head><body><h2 id="heading-1"><a href="#heading-1">Heading 1</a></h2>
       <h3 id="heading-1-1"><a href="#heading-1-1">Heading 1-1</a></h3>
       <h4 id="heading-1-1-1"><a href="#heading-1-1-1">Heading 1-1-1</a></h4>
       <h3 id="heading-2"><a href="#heading-2">Heading 2</a></h3>
       <h4 id="heading-2-1"><a href="#heading-2-1">Heading 2-1</a></h4>
       <h2 id="heading-3"><a href="#heading-3">Heading 3</a></h2>
+    </body></html>"
+`;
+
+exports[`rehypeCollapsibleToc > 特殊な変換ができる > 見出しにインラインコードブロックが入っているとき 1`] = `
+"<details open class="rehype-toc-details"><summary class="rehype-toc-summary">目次</summary><ol class="rehype-toc-ol"><li class="rehype-toc-li"><a href="#heading-1" class="rehype-toc-a">Heading 1</a><ol class="rehype-toc-ol"><li class="rehype-toc-li"><a href="#heading-1-1" class="rehype-toc-a">Heading 1-1</a></li></ol></li></ol></details><html><head></head><body><h2 id="heading-1"><a href="#heading-1">Heading <code>1</code></a></h2>
+      <h3 id="heading-1-1"><a href="#heading-1-1">Heading <code>1-1</code></a></h3>
     </body></html>"
 `;

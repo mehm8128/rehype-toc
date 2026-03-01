@@ -118,15 +118,26 @@ const createListItemElement = (node: Element): Element => {
 	const headingChildren = node.children.flatMap(child =>
 		child.type === 'element' ? child.children : []
 	)
-	const headingTextElement = headingChildren.find(
-		child => child.type === 'text'
-	)
-	if (!headingTextElement) {
+	const headingText = headingChildren
+		.map((child: ElementContent): string => {
+			if (child.type === 'text') {
+				return child.value
+			}
+			if (child.type === 'element') {
+				return child.children
+					.filter(c => c.type === 'text')
+					.map(c => c.value)
+					.join('')
+			}
+			return ''
+		})
+		.join('')
+
+	if (headingText === '') {
 		throw new Error('見出しにテキストがありません')
 	}
 
 	const headingId = node.properties.id
-	const headingText = headingTextElement.value
 
 	const anchorElement: Element = {
 		type: 'element',

@@ -3,28 +3,29 @@ import { describe, expect, test } from 'vitest'
 import { rehypeCollapsibleToc } from '../src'
 
 describe('rehypeCollapsibleToc', () => {
-	test('h2だけのとき、同じレベルで作成される', async () => {
-		const input = `
+	describe('基本的な変換ができる', () => {
+		test('h2だけのとき、同じレベルで作成される', async () => {
+			const input = `
       <h2 id="heading-1"><a href="#heading-1">Heading 1</a></h2>
       <h2 id="heading-2"><a href="#heading-2">Heading 2</a></h2>
       <h2 id="heading-3"><a href="#heading-3">Heading 3</a></h2>
       `
-		const { value } = await rehype().use(rehypeCollapsibleToc).process(input)
-		expect(value).toMatchSnapshot()
-	})
-	test('h2以外で同じレベルの見出しが適切に作成される', async () => {
-		const input = `
+			const { value } = await rehype().use(rehypeCollapsibleToc).process(input)
+			expect(value).toMatchSnapshot()
+		})
+		test('h2以外で同じレベルの見出しが適切に作成される', async () => {
+			const input = `
       <h2 id="heading-1"><a href="#heading-1">Heading 1</a></h2>
       <h3 id="heading-1-1"><a href="#heading-1-1">Heading 1-1</a></h3>
       <h3 id="heading-1-2"><a href="#heading-1-2">Heading 1-2</a></h3>
       <h4 id="heading-1-2-1"><a href="#heading-1-2-1">Heading 1-2-1</a></h4>
       <h4 id="heading-1-2-2"><a href="#heading-1-2-2">Heading 1-2-2</a></h4>
     `
-		const { value } = await rehype().use(rehypeCollapsibleToc).process(input)
-		expect(value).toMatchSnapshot()
-	})
-	test('低いレベルの見出しに戻るときにも適切に作成される', async () => {
-		const input = `
+			const { value } = await rehype().use(rehypeCollapsibleToc).process(input)
+			expect(value).toMatchSnapshot()
+		})
+		test('低いレベルの見出しに戻るときにも適切に作成される', async () => {
+			const input = `
       <h2 id="heading-1"><a href="#heading-1">Heading 1</a></h2>
       <h3 id="heading-1-1"><a href="#heading-1-1">Heading 1-1</a></h3>
       <h4 id="heading-1-1-1"><a href="#heading-1-1-1">Heading 1-1-1</a></h4>
@@ -32,7 +33,19 @@ describe('rehypeCollapsibleToc', () => {
       <h4 id="heading-2-1"><a href="#heading-2-1">Heading 2-1</a></h4>
       <h2 id="heading-3"><a href="#heading-3">Heading 3</a></h2>
     `
-		const { value } = await rehype().use(rehypeCollapsibleToc).process(input)
-		expect(value).toMatchSnapshot()
+			const { value } = await rehype().use(rehypeCollapsibleToc).process(input)
+			expect(value).toMatchSnapshot()
+		})
+	})
+
+	describe('特殊な変換ができる', () => {
+		test('見出しにインラインコードブロックが入っているとき', async () => {
+			const input = `
+      <h2 id="heading-1"><a href="#heading-1">Heading <code>1</code></a></h2>
+      <h3 id="heading-1-1"><a href="#heading-1-1">Heading <code>1-1</code></a></h3>
+    `
+			const { value } = await rehype().use(rehypeCollapsibleToc).process(input)
+			expect(value).toMatchSnapshot()
+		})
 	})
 })
