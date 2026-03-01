@@ -123,7 +123,7 @@ const createListItemElement = (node: Element): Element => {
 			if (child.type === 'text') {
 				return child.value
 			}
-			if (child.type === 'element') {
+			if (child.type === 'element' && child.tagName === 'code') {
 				return child.children
 					.filter(c => c.type === 'text')
 					.map(c => c.value)
