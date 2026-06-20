@@ -4,7 +4,7 @@
 	"type": "module",
 	"repository": {
 		"type": "git",
-		"url": "git+ssh://git@github.com/mehm8128/rehype-toc.git"
+		"url": "git+https://github.com/mehm8128/rehype-toc.git"
 	},
 	"homepage": "https://github.com/mehm8128/rehype-toc",
 	"license": "MIT",
